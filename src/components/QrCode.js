@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
-import { Box, Image, Link, Text } from '@chakra-ui/react'
+import { Box, Link, Text } from '@chakra-ui/react'
 import { CalendarIcon, PlusSquareIcon } from '@chakra-ui/icons'
 import QRCode from 'react-qr-code';
 import app from "../fireBase.js";
 import { getDatabase, onValue, ref, set, } from "firebase/database";
 import { nanoid } from 'nanoid'
 import { useNavigate } from "react-router-dom"
+import Navbar from './Navbar'
 
 
 
@@ -35,7 +36,7 @@ function QrCode() {
         console.log(data[value]);
         console.log(value, "value")
         if (data[value].status === 1) {
-          navigate('/alisveris')
+          // navigate('/alisveris')
         } else if (data[value].status === 101) {
           id = nanoid();
           setValue(id);
@@ -54,6 +55,7 @@ function QrCode() {
 
   return (
     <div>
+      <Navbar redirect="/" color="#b83163" text="MKOLAY"></Navbar>
       <Box
         maxW={{
           sm: 'sm',
@@ -72,13 +74,19 @@ function QrCode() {
         <Text
           fontWeight={'bold'}
           fontSize={{
-            sm: "xl",
+            sm: "2xl",
             xl: "4xl"
 
           }}
 
         >Hoş geldiniz.</Text>
-        <Text padding={2}>MKOLAY kantin'e giriş yapabilmek için QR Kodu turnikeye okutman gerekiyor.</Text>
+        <Text
+          fontSize={{
+            sm: "xl",
+            xl: "2xl"
+
+          }}
+          padding={2}>MKOLAY kantin'e giriş yapabilmek için QR Kodu turnikeye okutman gerekiyor.</Text>
         <Box
           maxW={{
             sm: 'sm',
@@ -92,7 +100,7 @@ function QrCode() {
             lg: 'lg',
             xl: 'xl'
           }}
-          margin="auto"
+          margin={["20px auto", "50px auto"]}
           display="flex"
           justifyContent="center"
         >
@@ -102,7 +110,6 @@ function QrCode() {
           <QRCode
             title="GeeksForGeeks"
             value={value}
-
             size={256}
           />
         </Box>
@@ -111,12 +118,22 @@ function QrCode() {
           justifyContent={'center'}
         >
           <Link style={linkStyle}>
-            <CalendarIcon color={'#b83163'} />
-            <Text>Alışveriş Geçmişim</Text>
+            <Box
+              w={["6em", "8em"]}
+            >
+              <CalendarIcon color={'#b83163'} />
+              <Text>Alışveriş Geçmişim</Text>
+            </Box>
+
           </Link>
           <Link style={linkStyle}>
-            <PlusSquareIcon color={'#b83163'} />
-            <Text>Yeni Kart Ekle</Text>
+            <Box
+              w={["6em", "8em"]}
+            >
+              <PlusSquareIcon color={'#b83163'} />
+              <Text>Yeni Kart Ekle</Text>
+            </Box>
+
           </Link>
         </Box>
       </Box>
