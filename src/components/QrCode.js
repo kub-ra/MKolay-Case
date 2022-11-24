@@ -36,7 +36,7 @@ function QrCode() {
         console.log(data[value]);
         console.log(value, "value")
         if (data[value].status === 1) {
-          // navigate('/alisveris')
+          navigate('/alisveris')
         } else if (data[value].status === 101) {
           id = nanoid();
           setValue(id);
@@ -112,7 +112,12 @@ function QrCode() {
             value={value}
             size={256}
           />
+
+
         </Box>
+        <Text
+          margin={["10px auto", "20px auto"]}
+        >{`Status:${statusVal}`}</Text>
         <Box
           display={'flex'}
           justifyContent={'center'}
