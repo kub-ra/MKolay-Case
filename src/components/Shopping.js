@@ -11,7 +11,7 @@ const linkStyle = {
 function Shopping() {
   return (
     <div>
-      <Navbar redirect="/kantin" color="#b83163" text="MKOLAY"></Navbar>
+      <Navbar redirect="/" color="#b83163" text="MKOLAY"></Navbar>
       <Link
         style={linkStyle}
 

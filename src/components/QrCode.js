@@ -3,7 +3,7 @@ import { Box, Link, Text } from '@chakra-ui/react'
 import { CalendarIcon, PlusSquareIcon } from '@chakra-ui/icons'
 import QRCode from 'react-qr-code';
 import app from "../fireBase.js";
-import { getDatabase, onValue, ref, set, } from "firebase/database";
+import { getDatabase, onValue, ref, set, child, push, update } from "firebase/database";
 import { nanoid } from 'nanoid'
 import { useNavigate } from "react-router-dom"
 import Navbar from './Navbar'
@@ -21,27 +21,30 @@ const linkStyle = {
 
 
 function QrCode() {
-  let id = nanoid();
-  let navigate = useNavigate();
-  const [value, setValue] = useState(id);
-  const [statusVal, setStatusVal] = useState(101);
   const db = getDatabase(app);
+  let id = nanoid();
+
+  let navigate = useNavigate();
+
+  const [value, setValue] = useState(id);
+  const [statusVal, setStatusVal] = useState(1001);
+
   function writeData(status, id) {
     set(ref(db, 'qr/' + id), {
       status: status
     }).then(() => {
-      const dbRef = ref(db, "qr")
+      const dbRef = ref(db, "qr", id)
       onValue(dbRef, (snapshot) => {
         const data = snapshot.val();
-        console.log(data[value]);
-        console.log(value, "value")
-        if (data[value].status === 1) {
-          navigate('/alisveris')
-        } else if (data[value].status === 101) {
+        console.log(data);
+        setStatusVal(data[value].status);
+        if (statusVal === 1) {
+          // navigate('/alisveris')
+        } else if (statusVal === 101) {
           id = nanoid();
           setValue(id);
-          writeData(1, value);
-
+          setStatusVal(1)
+          // writeData(1, value);
         }
       })
     })
@@ -49,8 +52,7 @@ function QrCode() {
 
   useEffect(() => {
     writeData(statusVal, value);
-
-  }, [])
+  }, [statusVal]);
 
 
   return (
@@ -118,6 +120,7 @@ function QrCode() {
         <Text
           margin={["10px auto", "20px auto"]}
         >{`Status:${statusVal}`}</Text>
+
         <Box
           display={'flex'}
           justifyContent={'center'}

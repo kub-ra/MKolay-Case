@@ -14,9 +14,7 @@ import Complete from './components/Complete';
 function App() {
   return (
     <div className="App">
-
       <BrowserRouter>
-
         <Routes>
           <Route exact path="/" element={<Login />} />
           <Route exact path="/kantin" element={<QrCode />} />

@@ -16,22 +16,23 @@ function Navbar({ redirect, color, text }) {
         color="#fff"
       >
         <Box
-          w={["60%", "50%"]}
+          w={["55%", "50%"]}
           display="flex"
           justifyContent="space-between"
-          margin={["auto 30px", "auto 50px"]}
+          margin={["auto 20px", "auto 50px"]}
         >
           <Link to={redirect}>
             <ArrowLeftIcon
               margin="auto"
 
               h={["1em", "3em"]}
-              fontSize={["xl", "2xl"]}
+              fontSize={["17px", "2xl"]}
             ></ArrowLeftIcon>
           </Link>
 
           <Text
             fontSize={["15px", "3xl"]}
+
 
           >{text}</Text>
 

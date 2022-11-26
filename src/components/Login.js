@@ -20,9 +20,7 @@ function Login() {
         padding={2}
         backgroundColor={'gray.200'}
         height={'100vh'}
-        margin="auto"
-
-      >
+        margin="auto" >
         <Link
           style={linkStyle}
           to="/kantin">
